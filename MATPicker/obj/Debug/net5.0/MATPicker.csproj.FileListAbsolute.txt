@@ -1,0 +1,15 @@
+C:\Users\Matth\source\repos\MATPicker\MATPicker\bin\Debug\net5.0\MATPicker.exe
+C:\Users\Matth\source\repos\MATPicker\MATPicker\bin\Debug\net5.0\MATPicker.deps.json
+C:\Users\Matth\source\repos\MATPicker\MATPicker\bin\Debug\net5.0\MATPicker.runtimeconfig.json
+C:\Users\Matth\source\repos\MATPicker\MATPicker\bin\Debug\net5.0\MATPicker.runtimeconfig.dev.json
+C:\Users\Matth\source\repos\MATPicker\MATPicker\bin\Debug\net5.0\MATPicker.dll
+C:\Users\Matth\source\repos\MATPicker\MATPicker\bin\Debug\net5.0\MATPicker.pdb
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.AssemblyInfoInputs.cache
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.AssemblyInfo.cs
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.csproj.CoreCompileInputs.cache
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.dll
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.pdb
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.genruntimeconfig.cache
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.csproj.AssemblyReference.cache
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.Main.resources
+C:\Users\Matth\source\repos\MATPicker\MATPicker\obj\Debug\net5.0\MATPicker.csproj.GenerateResource.cache
