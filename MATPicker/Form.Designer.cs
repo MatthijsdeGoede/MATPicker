@@ -1,7 +1,7 @@
 ﻿
 namespace MATPicker
 {
-    partial class Main
+    partial class Form
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,7 +30,9 @@ namespace MATPicker
         private void InitializeComponent()
         {
             this.grpLog = new System.Windows.Forms.GroupBox();
-            this.txtLog = new System.Windows.Forms.TextBox();
+            this.rtxLog = new System.Windows.Forms.RichTextBox();
+            this.rdoLogErrorsOnly = new System.Windows.Forms.RadioButton();
+            this.rdoLogAll = new System.Windows.Forms.RadioButton();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lblCredits = new System.Windows.Forms.Label();
@@ -45,12 +47,15 @@ namespace MATPicker
             this.txtExportFolder = new System.Windows.Forms.TextBox();
             this.lblExportFolder = new System.Windows.Forms.Label();
             this.lblOpenedFile = new System.Windows.Forms.Label();
-            this.lblFilePickStatus = new System.Windows.Forms.Label();
+            this.lblModFolderStatus = new System.Windows.Forms.Label();
             this.cklFileTypes = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOpenExportFolder = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.grpLocation = new System.Windows.Forms.GroupBox();
+            this.lblExportFolderStatus = new System.Windows.Forms.Label();
+            this.lblBaseFolderStatus = new System.Windows.Forms.Label();
+            this.lblOpenedFileStatus = new System.Windows.Forms.Label();
             this.rdoFolder = new System.Windows.Forms.RadioButton();
             this.rdoSinglePMD = new System.Windows.Forms.RadioButton();
             this.ofdPMDFile = new System.Windows.Forms.OpenFileDialog();
@@ -64,7 +69,9 @@ namespace MATPicker
             // 
             // grpLog
             // 
-            this.grpLog.Controls.Add(this.txtLog);
+            this.grpLog.Controls.Add(this.rtxLog);
+            this.grpLog.Controls.Add(this.rdoLogErrorsOnly);
+            this.grpLog.Controls.Add(this.rdoLogAll);
             this.grpLog.Controls.Add(this.btnClearLog);
             this.grpLog.Controls.Add(this.label3);
             this.grpLog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -78,15 +85,39 @@ namespace MATPicker
             this.grpLog.TabStop = false;
             this.grpLog.Text = "Log";
             // 
-            // txtLog
+            // rtxLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(26, 40);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.ReadOnly = true;
-            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(726, 266);
-            this.txtLog.TabIndex = 12;
+            this.rtxLog.Location = new System.Drawing.Point(26, 40);
+            this.rtxLog.Name = "rtxLog";
+            this.rtxLog.ReadOnly = true;
+            this.rtxLog.Size = new System.Drawing.Size(726, 264);
+            this.rtxLog.TabIndex = 12;
+            this.rtxLog.Text = "";
+            // 
+            // rdoLogErrorsOnly
+            // 
+            this.rdoLogErrorsOnly.AutoSize = true;
+            this.rdoLogErrorsOnly.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rdoLogErrorsOnly.Location = new System.Drawing.Point(130, 325);
+            this.rdoLogErrorsOnly.Name = "rdoLogErrorsOnly";
+            this.rdoLogErrorsOnly.Size = new System.Drawing.Size(147, 21);
+            this.rdoLogErrorsOnly.TabIndex = 14;
+            this.rdoLogErrorsOnly.Text = "Display errors only";
+            this.rdoLogErrorsOnly.UseVisualStyleBackColor = true;
+            this.rdoLogErrorsOnly.CheckedChanged += new System.EventHandler(this.rdoLogErrorsOnly_CheckedChanged);
+            // 
+            // rdoLogAll
+            // 
+            this.rdoLogAll.AutoSize = true;
+            this.rdoLogAll.Checked = true;
+            this.rdoLogAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.rdoLogAll.Location = new System.Drawing.Point(26, 325);
+            this.rdoLogAll.Name = "rdoLogAll";
+            this.rdoLogAll.Size = new System.Drawing.Size(93, 21);
+            this.rdoLogAll.TabIndex = 13;
+            this.rdoLogAll.TabStop = true;
+            this.rdoLogAll.Text = "Display all";
+            this.rdoLogAll.UseVisualStyleBackColor = true;
             // 
             // btnClearLog
             // 
@@ -94,7 +125,7 @@ namespace MATPicker
             this.btnClearLog.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(75, 36);
-            this.btnClearLog.TabIndex = 13;
+            this.btnClearLog.TabIndex = 15;
             this.btnClearLog.Text = "Clear";
             this.btnClearLog.UseVisualStyleBackColor = true;
             this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
@@ -127,6 +158,7 @@ namespace MATPicker
             this.txtModFolder.Name = "txtModFolder";
             this.txtModFolder.Size = new System.Drawing.Size(628, 26);
             this.txtModFolder.TabIndex = 0;
+            this.txtModFolder.TextChanged += new System.EventHandler(this.txtModFolder_TextChanged);
             this.txtModFolder.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtModFolder_DragDrop);
             this.txtModFolder.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtModFolder_DragEnter);
             // 
@@ -149,6 +181,7 @@ namespace MATPicker
             this.txtBaseFolder.Name = "txtBaseFolder";
             this.txtBaseFolder.Size = new System.Drawing.Size(628, 26);
             this.txtBaseFolder.TabIndex = 6;
+            this.txtBaseFolder.TextChanged += new System.EventHandler(this.txtBaseFolder_TextChanged);
             this.txtBaseFolder.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtBaseFolder_DragDrop);
             this.txtBaseFolder.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtBaseFolder_DragEnter);
             // 
@@ -204,6 +237,7 @@ namespace MATPicker
             this.txtOpenedFiles.Name = "txtOpenedFiles";
             this.txtOpenedFiles.Size = new System.Drawing.Size(628, 26);
             this.txtOpenedFiles.TabIndex = 2;
+            this.txtOpenedFiles.TextChanged += new System.EventHandler(this.txtOpenedFiles_TextChanged);
             this.txtOpenedFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtOpenedFiles_DragDrop);
             this.txtOpenedFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtOpenedFiles_DragEnter);
             // 
@@ -216,6 +250,7 @@ namespace MATPicker
             this.txtExportFolder.Name = "txtExportFolder";
             this.txtExportFolder.Size = new System.Drawing.Size(628, 26);
             this.txtExportFolder.TabIndex = 8;
+            this.txtExportFolder.TextChanged += new System.EventHandler(this.txtExportFolder_TextChanged);
             this.txtExportFolder.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtExportFolder_DragDrop);
             this.txtExportFolder.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtExportFolder_DragEnter);
             // 
@@ -239,14 +274,15 @@ namespace MATPicker
             this.lblOpenedFile.TabIndex = 3;
             this.lblOpenedFile.Text = "PMD (folder) to pick for";
             // 
-            // lblFilePickStatus
+            // lblModFolderStatus
             // 
-            this.lblFilePickStatus.AutoSize = true;
-            this.lblFilePickStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblFilePickStatus.Location = new System.Drawing.Point(380, 18);
-            this.lblFilePickStatus.Name = "lblFilePickStatus";
-            this.lblFilePickStatus.Size = new System.Drawing.Size(0, 17);
-            this.lblFilePickStatus.TabIndex = 14;
+            this.lblModFolderStatus.AutoSize = true;
+            this.lblModFolderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblModFolderStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblModFolderStatus.Location = new System.Drawing.Point(200, 38);
+            this.lblModFolderStatus.Name = "lblModFolderStatus";
+            this.lblModFolderStatus.Size = new System.Drawing.Size(0, 17);
+            this.lblModFolderStatus.TabIndex = 14;
             // 
             // cklFileTypes
             // 
@@ -296,6 +332,9 @@ namespace MATPicker
             // 
             // grpLocation
             // 
+            this.grpLocation.Controls.Add(this.lblExportFolderStatus);
+            this.grpLocation.Controls.Add(this.lblBaseFolderStatus);
+            this.grpLocation.Controls.Add(this.lblOpenedFileStatus);
             this.grpLocation.Controls.Add(this.rdoFolder);
             this.grpLocation.Controls.Add(this.rdoSinglePMD);
             this.grpLocation.Controls.Add(this.btnOpenModFolder);
@@ -307,7 +346,7 @@ namespace MATPicker
             this.grpLocation.Controls.Add(this.cklFileTypes);
             this.grpLocation.Controls.Add(this.txtModFolder);
             this.grpLocation.Controls.Add(this.lblBaseFolder);
-            this.grpLocation.Controls.Add(this.lblFilePickStatus);
+            this.grpLocation.Controls.Add(this.lblModFolderStatus);
             this.grpLocation.Controls.Add(this.txtBaseFolder);
             this.grpLocation.Controls.Add(this.lblOpenedFile);
             this.grpLocation.Controls.Add(this.lblExportFolder);
@@ -324,6 +363,36 @@ namespace MATPicker
             this.grpLocation.TabIndex = 4;
             this.grpLocation.TabStop = false;
             this.grpLocation.Text = "Pick Files";
+            // 
+            // lblExportFolderStatus
+            // 
+            this.lblExportFolderStatus.AutoSize = true;
+            this.lblExportFolderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblExportFolderStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblExportFolderStatus.Location = new System.Drawing.Point(200, 258);
+            this.lblExportFolderStatus.Name = "lblExportFolderStatus";
+            this.lblExportFolderStatus.Size = new System.Drawing.Size(0, 17);
+            this.lblExportFolderStatus.TabIndex = 23;
+            // 
+            // lblBaseFolderStatus
+            // 
+            this.lblBaseFolderStatus.AutoSize = true;
+            this.lblBaseFolderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblBaseFolderStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblBaseFolderStatus.Location = new System.Drawing.Point(200, 190);
+            this.lblBaseFolderStatus.Name = "lblBaseFolderStatus";
+            this.lblBaseFolderStatus.Size = new System.Drawing.Size(0, 17);
+            this.lblBaseFolderStatus.TabIndex = 22;
+            // 
+            // lblOpenedFileStatus
+            // 
+            this.lblOpenedFileStatus.AutoSize = true;
+            this.lblOpenedFileStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOpenedFileStatus.ForeColor = System.Drawing.Color.Red;
+            this.lblOpenedFileStatus.Location = new System.Drawing.Point(200, 103);
+            this.lblOpenedFileStatus.Name = "lblOpenedFileStatus";
+            this.lblOpenedFileStatus.Size = new System.Drawing.Size(0, 17);
+            this.lblOpenedFileStatus.TabIndex = 21;
             // 
             // rdoFolder
             // 
@@ -370,7 +439,7 @@ namespace MATPicker
             // 
             this.fbdExportFolder.RootFolder = System.Environment.SpecialFolder.MyComputer;
             // 
-            // Main
+            // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -379,7 +448,7 @@ namespace MATPicker
             this.Controls.Add(this.grpLog);
             this.Controls.Add(this.grpLocation);
             this.MinimumSize = new System.Drawing.Size(818, 1028);
-            this.Name = "Main";
+            this.Name = "Form";
             this.Text = "MATPicker";
             this.grpLog.ResumeLayout(false);
             this.grpLog.PerformLayout();
@@ -393,7 +462,7 @@ namespace MATPicker
         #endregion
 
         private System.Windows.Forms.GroupBox grpLocation;
-        private System.Windows.Forms.Label lblFilePickStatus;
+        private System.Windows.Forms.Label lblModFolderStatus;
         private System.Windows.Forms.Label lblOpenedFile;
         private System.Windows.Forms.TextBox txtOpenedFiles;
         private System.Windows.Forms.Button btnPickFiles;
@@ -404,7 +473,6 @@ namespace MATPicker
         private System.Windows.Forms.Label lblModFolder;
         private System.Windows.Forms.TextBox txtModFolder;
         private System.Windows.Forms.GroupBox grpLog;
-        private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.Button btnClearLog;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckedListBox cklFileTypes;
@@ -421,6 +489,12 @@ namespace MATPicker
         private System.Windows.Forms.FolderBrowserDialog fbdModFolder;
         private System.Windows.Forms.FolderBrowserDialog fbdBaseFolder;
         private System.Windows.Forms.FolderBrowserDialog fbdExportFolder;
+        private System.Windows.Forms.RichTextBox rtxLog;
+        private System.Windows.Forms.RadioButton rdoLogErrorsOnly;
+        private System.Windows.Forms.RadioButton rdoLogAll;
+        private System.Windows.Forms.Label lblBaseFolderStatus;
+        private System.Windows.Forms.Label lblOpenedFileStatus;
+        private System.Windows.Forms.Label lblExportFolderStatus;
     }
 }
 
