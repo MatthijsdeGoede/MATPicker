@@ -68,9 +68,12 @@
                 Config.PickTobjFiles = cklFileTypes.GetItemChecked(1);
                 Config.PickDdsFiles = cklFileTypes.GetItemChecked(2);
                 Config.PickModelFiles = cklFileTypes.GetItemChecked(3);
+                Config.ExportEmptyFolders = chkExportEmptyFolders.Checked;
                 Log.Box = rtxLog;
                 Log.ShowErrorsOnly = rdoLogErrorsOnly.Checked;
+                Log.Clear();
                 Picker.Pick();
+                Log.Show();
             }
         }
 

@@ -53,6 +53,7 @@ namespace MATPicker
             this.btnOpenExportFolder = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.grpLocation = new System.Windows.Forms.GroupBox();
+            this.chkExportEmptyFolders = new System.Windows.Forms.CheckBox();
             this.lblExportFolderStatus = new System.Windows.Forms.Label();
             this.lblBaseFolderStatus = new System.Windows.Forms.Label();
             this.lblOpenedFileStatus = new System.Windows.Forms.Label();
@@ -201,7 +202,7 @@ namespace MATPicker
             this.btnOpenBaseFolder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenBaseFolder.Name = "btnOpenBaseFolder";
             this.btnOpenBaseFolder.Size = new System.Drawing.Size(75, 36);
-            this.btnOpenBaseFolder.TabIndex = 7;
+            this.btnOpenBaseFolder.TabIndex = 8;
             this.btnOpenBaseFolder.Text = "Open";
             this.btnOpenBaseFolder.UseVisualStyleBackColor = true;
             this.btnOpenBaseFolder.Click += new System.EventHandler(this.btnOpenBaseFolder_Click);
@@ -219,7 +220,7 @@ namespace MATPicker
             // 
             // btnPickFiles
             // 
-            this.btnPickFiles.Location = new System.Drawing.Point(26, 465);
+            this.btnPickFiles.Location = new System.Drawing.Point(26, 484);
             this.btnPickFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnPickFiles.Name = "btnPickFiles";
             this.btnPickFiles.Size = new System.Drawing.Size(726, 36);
@@ -245,7 +246,7 @@ namespace MATPicker
             // 
             this.txtExportFolder.AllowDrop = true;
             this.txtExportFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtExportFolder.Location = new System.Drawing.Point(26, 286);
+            this.txtExportFolder.Location = new System.Drawing.Point(26, 305);
             this.txtExportFolder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtExportFolder.Name = "txtExportFolder";
             this.txtExportFolder.Size = new System.Drawing.Size(628, 26);
@@ -258,7 +259,7 @@ namespace MATPicker
             // 
             this.lblExportFolder.AutoSize = true;
             this.lblExportFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblExportFolder.Location = new System.Drawing.Point(26, 258);
+            this.lblExportFolder.Location = new System.Drawing.Point(26, 277);
             this.lblExportFolder.Name = "lblExportFolder";
             this.lblExportFolder.Size = new System.Drawing.Size(92, 17);
             this.lblExportFolder.TabIndex = 18;
@@ -293,7 +294,7 @@ namespace MATPicker
             "TOBJ files",
             "DDS files",
             "PMD/PMG/PMC files"});
-            this.cklFileTypes.Location = new System.Drawing.Point(26, 358);
+            this.cklFileTypes.Location = new System.Drawing.Point(26, 377);
             this.cklFileTypes.Name = "cklFileTypes";
             this.cklFileTypes.Size = new System.Drawing.Size(726, 88);
             this.cklFileTypes.TabIndex = 10;
@@ -302,7 +303,7 @@ namespace MATPicker
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(26, 330);
+            this.label2.Location = new System.Drawing.Point(26, 349);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(94, 17);
             this.label2.TabIndex = 20;
@@ -310,7 +311,7 @@ namespace MATPicker
             // 
             // btnOpenExportFolder
             // 
-            this.btnOpenExportFolder.Location = new System.Drawing.Point(677, 281);
+            this.btnOpenExportFolder.Location = new System.Drawing.Point(677, 300);
             this.btnOpenExportFolder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOpenExportFolder.Name = "btnOpenExportFolder";
             this.btnOpenExportFolder.Size = new System.Drawing.Size(75, 36);
@@ -332,6 +333,7 @@ namespace MATPicker
             // 
             // grpLocation
             // 
+            this.grpLocation.Controls.Add(this.chkExportEmptyFolders);
             this.grpLocation.Controls.Add(this.lblExportFolderStatus);
             this.grpLocation.Controls.Add(this.lblBaseFolderStatus);
             this.grpLocation.Controls.Add(this.lblOpenedFileStatus);
@@ -359,17 +361,28 @@ namespace MATPicker
             this.grpLocation.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.grpLocation.Name = "grpLocation";
             this.grpLocation.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.grpLocation.Size = new System.Drawing.Size(776, 527);
+            this.grpLocation.Size = new System.Drawing.Size(776, 538);
             this.grpLocation.TabIndex = 4;
             this.grpLocation.TabStop = false;
             this.grpLocation.Text = "Pick Files";
+            // 
+            // chkExportEmptyFolders
+            // 
+            this.chkExportEmptyFolders.AutoSize = true;
+            this.chkExportEmptyFolders.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.chkExportEmptyFolders.Location = new System.Drawing.Point(495, 259);
+            this.chkExportEmptyFolders.Name = "chkExportEmptyFolders";
+            this.chkExportEmptyFolders.Size = new System.Drawing.Size(159, 21);
+            this.chkExportEmptyFolders.TabIndex = 7;
+            this.chkExportEmptyFolders.Text = "Export empty folders";
+            this.chkExportEmptyFolders.UseVisualStyleBackColor = true;
             // 
             // lblExportFolderStatus
             // 
             this.lblExportFolderStatus.AutoSize = true;
             this.lblExportFolderStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblExportFolderStatus.ForeColor = System.Drawing.Color.Red;
-            this.lblExportFolderStatus.Location = new System.Drawing.Point(200, 258);
+            this.lblExportFolderStatus.Location = new System.Drawing.Point(200, 277);
             this.lblExportFolderStatus.Name = "lblExportFolderStatus";
             this.lblExportFolderStatus.Size = new System.Drawing.Size(0, 17);
             this.lblExportFolderStatus.TabIndex = 23;
@@ -397,11 +410,13 @@ namespace MATPicker
             // rdoFolder
             // 
             this.rdoFolder.AutoSize = true;
+            this.rdoFolder.Checked = true;
             this.rdoFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rdoFolder.Location = new System.Drawing.Point(585, 168);
             this.rdoFolder.Name = "rdoFolder";
             this.rdoFolder.Size = new System.Drawing.Size(69, 21);
             this.rdoFolder.TabIndex = 4;
+            this.rdoFolder.TabStop = true;
             this.rdoFolder.Text = "Folder";
             this.rdoFolder.UseVisualStyleBackColor = true;
             this.rdoFolder.CheckedChanged += new System.EventHandler(this.rdoFolder_CheckedChanged);
@@ -409,13 +424,11 @@ namespace MATPicker
             // rdoSinglePMD
             // 
             this.rdoSinglePMD.AutoSize = true;
-            this.rdoSinglePMD.Checked = true;
             this.rdoSinglePMD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.rdoSinglePMD.Location = new System.Drawing.Point(454, 168);
             this.rdoSinglePMD.Name = "rdoSinglePMD";
             this.rdoSinglePMD.Size = new System.Drawing.Size(102, 21);
             this.rdoSinglePMD.TabIndex = 3;
-            this.rdoSinglePMD.TabStop = true;
             this.rdoSinglePMD.Text = "Single PMD";
             this.rdoSinglePMD.UseVisualStyleBackColor = true;
             // 
@@ -495,6 +508,8 @@ namespace MATPicker
         private System.Windows.Forms.Label lblBaseFolderStatus;
         private System.Windows.Forms.Label lblOpenedFileStatus;
         private System.Windows.Forms.Label lblExportFolderStatus;
+        private System.Windows.Forms.Button btnSortLog;
+        private System.Windows.Forms.CheckBox chkExportEmptyFolders;
     }
 }
 

@@ -14,5 +14,6 @@ namespace MATPicker
         public static bool PickTobjFiles { get; set; } = false;
         public static bool PickDdsFiles { get; set; } = false;
         public static bool PickModelFiles { get; set; } = false;
+        public static bool ExportEmptyFolders { get; set; } = false;
     }
 }

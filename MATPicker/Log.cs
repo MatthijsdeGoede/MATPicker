@@ -9,38 +9,40 @@ namespace MATPicker
 {
     class Log
     {
+        private static SortedSet<string> lines = new();
         public static RichTextBox Box { get; set; }
         public static bool ShowErrorsOnly { get; set; }
-        public static void Append(string data) 
+        public static void AppendPicked(string data) 
         {
-            Box.AppendText($"{data}\\n");
+            lines.Add($"<SUCCESS> Picked {data.Substring(data.LastIndexOf(".")+1)}: {data}");
+        }
+        public static void AppendMissing(string data)
+        {
+            AppendError($"Failed to locate {data.Substring(data.LastIndexOf(".") + 1)}: {data}");
         }
         public static void AppendError(string data)
         {
-            Box.AppendText($"<ERROR> {data}\\n");
+            lines.Add($"<ERROR> {data}");
         }
         public static void Clear() 
         {
+            lines.Clear();
             Box.Clear();
         }
 
         public static void Show()
         {
-            string[] lines = Box.Lines;
             Box.Text = "";
-
             foreach (string line in lines)
             {
                 bool errorLine = line.StartsWith("<ERROR>");
-                Box.SelectionColor = errorLine ? System.Drawing.Color.Red : System.Drawing.Color.Black;
+                Box.SelectionColor = errorLine ? System.Drawing.Color.Red : System.Drawing.Color.DarkGreen;
 
                 if (!ShowErrorsOnly || errorLine) 
                 {
-                    Box.AppendText($"{line}\\n");
+                    Box.AppendText($"{line}\r\n");
                 }                
             }
         }
-
-
     }
 }

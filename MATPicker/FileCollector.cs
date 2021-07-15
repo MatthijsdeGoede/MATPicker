@@ -16,28 +16,33 @@ namespace MATPicker
 
         private static void getFile(string filePath)
         {
-            filePath = filePath.Replace("/", @"\");
-            string relativePath = Path.GetDirectoryName(filePath);
-          
-            Directory.CreateDirectory(Config.ExportFolder + relativePath);
+            string correctedFilePath = filePath.Replace("/", @"\");
+            string relativePath = Path.GetDirectoryName(correctedFilePath);
 
-            string tryModFolder = Config.ModFolder + filePath;
-            string tryBaseFolder = Config.BaseFolder + filePath;
-            string destFile = Config.ExportFolder + filePath;
+            string tryModFolder = Config.ModFolder + correctedFilePath;
+            string tryBaseFolder = Config.BaseFolder + correctedFilePath;
+            string destFile = Config.ExportFolder + correctedFilePath;
 
             if (File.Exists(tryModFolder))
             {
+                Directory.CreateDirectory(Config.ExportFolder + relativePath);
                 File.Copy(tryModFolder, destFile, true);
+                Log.AppendPicked(filePath);
             }
             else if (File.Exists(tryBaseFolder))
             {
+                Directory.CreateDirectory(Config.ExportFolder + relativePath);
                 File.Copy(tryBaseFolder, destFile, true);
+                Log.AppendPicked(filePath);
             }
             else
             {
-                Log.AppendError($"Unable to locate: {filePath}");
+                Log.AppendMissing(filePath);
+                if (Config.ExportEmptyFolders) 
+                {
+                    Directory.CreateDirectory(Config.ExportFolder + relativePath);
+                }
             }
-
         }
     }
 }
