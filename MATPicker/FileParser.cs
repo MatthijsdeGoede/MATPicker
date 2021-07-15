@@ -56,7 +56,7 @@ namespace MATPicker
             Debug.Print(searchPath);
             if (File.Exists(searchPath))
             {
-                modelFiles.Add(filePath);
+                modelFiles.Add(filePath.Replace(@"\", "/"));
             }
         }
 
