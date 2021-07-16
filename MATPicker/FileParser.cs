@@ -1,35 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Text.RegularExpressions;
-
-namespace MATPicker
+﻿namespace MATPicker
 {
-    class FileParser
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Text.RegularExpressions;
+
+    internal class FileParser
     {
-        public static HashSet<string> CollectFiles(string extension, string fileToSearchIn) {
+        public static HashSet<string> CollectFiles(string extension, string fileToSearchIn)
+        {
             HashSet<string> files = new HashSet<string>();
-            string correctedPath = correctFilePath(fileToSearchIn);
+            string correctedPath = CorrectFilePath(fileToSearchIn);
             string tryModFolder = Config.ModFolder + correctedPath;
-            string tryBaseFolder = Config.BaseFolder + correctedPath;
 
             if (File.Exists(tryModFolder))
             {
-                retrieveFilesFromFile(extension, tryModFolder, files);
-            }
-            else if (File.Exists(tryBaseFolder))
-            {
-                retrieveFilesFromFile(extension, tryBaseFolder, files);
+                RetrieveFilesFromFile(extension, tryModFolder, files);
             }
             else
             {
-                Log.AppendMissing(fileToSearchIn);
+                TryBaseFolders(correctedPath, extension, files, fileToSearchIn);
             }
             return files;
         }
 
-        private static void retrieveFilesFromFile(string extension, string filePath, HashSet<string> files)
+        private static void TryBaseFolders(string correctedPath, string extension, HashSet<string> files, string fileToSearchIn)
+        {
+            foreach (string baseFolder in Config.BaseFolders)
+            {
+                string tryBaseFolder = baseFolder + correctedPath;
+                if (File.Exists(tryBaseFolder))
+                {
+                    RetrieveFilesFromFile(extension, tryBaseFolder, files);
+                    return;
+                }
+            }
+            Log.AppendMissing(fileToSearchIn);
+        }
+
+        private static void RetrieveFilesFromFile(string extension, string filePath, HashSet<string> files)
         {
             string text = File.ReadAllText(filePath);
             Regex ItemRegex = new Regex(@"(\/)([a-zA-Z0-9_.\/]+?)(\" + extension + ")", RegexOptions.Compiled);
@@ -40,19 +49,19 @@ namespace MATPicker
             }
         }
 
-        internal static HashSet<string> CollectModelFiles(string pmdFile)
+        public static HashSet<string> CollectModelFiles(string pmdFile)
         {
             HashSet<string> modelFiles = new HashSet<string>();
-            addModelFileIfFound(pmdFile, modelFiles, ".pmd");
-            addModelFileIfFound(pmdFile, modelFiles, ".pmg");
-            addModelFileIfFound(pmdFile, modelFiles, ".pmc");
+            AddModelFileIfFound(pmdFile, modelFiles, ".pmd");
+            AddModelFileIfFound(pmdFile, modelFiles, ".pmg");
+            AddModelFileIfFound(pmdFile, modelFiles, ".pmc");
             return modelFiles;
         }
 
-        private static void addModelFileIfFound(string pmdFile, HashSet<string> modelFiles, string fileExtension)
+        private static void AddModelFileIfFound(string pmdFile, HashSet<string> modelFiles, string fileExtension)
         {
             string filePath = pmdFile.Substring(0, pmdFile.LastIndexOf(".")) + fileExtension;
-            string searchPath = Config.ModFolder + correctFilePath(filePath);
+            string searchPath = Config.ModFolder + CorrectFilePath(filePath);
             Debug.Print(searchPath);
             if (File.Exists(searchPath))
             {
@@ -73,12 +82,13 @@ namespace MATPicker
         public static HashSet<string> CollectTobjs(HashSet<string> matFiles)
         {
             HashSet<string> tobjFiles = new HashSet<string>();
-            foreach (var matFile in matFiles) {
+            foreach (var matFile in matFiles)
+            {
                 if (matFile != null)
                 {
                     tobjFiles.UnionWith(CollectFiles(".tobj", matFile));
                 }
-            } 
+            }
             return tobjFiles;
         }
 
@@ -87,16 +97,17 @@ namespace MATPicker
             HashSet<string> ddsFiles = new HashSet<string>();
             foreach (var tobjFile in tobjFiles)
             {
-                if (tobjFile != null) {
+                if (tobjFile != null)
+                {
                     ddsFiles.UnionWith(CollectFiles(".dds", tobjFile));
-                }                
+                }
             }
             return ddsFiles;
         }
 
-        public static string correctFilePath(string filePath) {
+        public static string CorrectFilePath(string filePath)
+        {
             return filePath.Replace("/", @"\");
         }
-
     }
 }

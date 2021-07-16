@@ -1,8 +1,6 @@
 ﻿namespace MATPicker
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
 
     public class Picker

@@ -1,16 +1,20 @@
 ﻿namespace MATPicker
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
+    using System.Text;
     using System.Windows.Forms;
 
     public partial class Form : System.Windows.Forms.Form
     {
         private string pmdFilterString = "PMD Files (*.pmd)|*.pmd";
+        private HashSet<string> baseFolders = new HashSet<string>();
 
         public Form()
         {
             InitializeComponent();
+            Log.Box = rtxLog;
         }
 
         //Button click events
@@ -43,7 +47,17 @@
         {
             if (fbdBaseFolder.ShowDialog() == DialogResult.OK)
             {
-                txtBaseFolder.Text = fbdBaseFolder.SelectedPath;
+                addMultipleBaseFolders(new HashSet<string>() { fbdBaseFolder.SelectedPath });
+            }
+        }
+
+        private void btnResetBaseFolders_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("All the currently opened base folders will be closed.", "Are you sure you want to reset?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                baseFolders.Clear();
+                txtBaseFolder.Text = "";
             }
         }
 
@@ -62,14 +76,13 @@
                 Config.ModFolder = txtModFolder.Text;
                 Config.SingleFile = rdoSinglePMD.Checked;
                 Config.OpenedFile = txtOpenedFiles.Text;
-                Config.BaseFolder = txtBaseFolder.Text;
+                Config.BaseFolders = baseFolders;
                 Config.ExportFolder = txtExportFolder.Text;
                 Config.PickMatFiles = cklFileTypes.GetItemChecked(0);
                 Config.PickTobjFiles = cklFileTypes.GetItemChecked(1);
                 Config.PickDdsFiles = cklFileTypes.GetItemChecked(2);
                 Config.PickModelFiles = cklFileTypes.GetItemChecked(3);
                 Config.ExportEmptyFolders = chkExportEmptyFolders.Checked;
-                Log.Box = rtxLog;
                 Log.ShowErrorsOnly = rdoLogErrorsOnly.Checked;
                 Log.Clear();
                 Picker.Pick();
@@ -84,9 +97,9 @@
 
         // Input validation
 
-        private bool validateFormFields() 
+        private bool validateFormFields()
         {
-            if (!validateFileOrFolder(txtModFolder.Text, false)) 
+            if (!validateFileOrFolder(txtModFolder.Text, false))
             {
                 lblModFolderStatus.Text = "Please select a valid mod folder that contains the selected PMD files!";
                 return false;
@@ -94,11 +107,6 @@
             if (!validateFileOrFolder(txtOpenedFiles.Text, rdoSinglePMD.Checked))
             {
                 lblOpenedFileStatus.Text = "Please select a valid PMD file or a folder that contains any!";
-                return false;
-            }
-            if (!validateFileOrFolder(txtBaseFolder.Text, false))
-            {
-                lblBaseFolderStatus.Text = "Please select a valid base folder in which the base.scs file is extracted!";
                 return false;
             }
             if (!validateFileOrFolder(txtExportFolder.Text, false))
@@ -109,12 +117,27 @@
             return true;
         }
 
-        private bool validateFileOrFolder(string path, bool file) 
+        private bool validateFileOrFolder(string path, bool file)
         {
             return !String.IsNullOrEmpty(path) && (file && Path.GetExtension(path).Equals(".pmd") || !file && Directory.Exists(path));
         }
 
-        // Drag and Drop Mode
+        // Business Logic
+
+        private void addMultipleBaseFolders(HashSet<String> folders)
+        {
+            StringBuilder openedFoldersBuilder = new StringBuilder(txtBaseFolder.Text);
+            lblBaseFolderStatus.Text = "";
+
+            foreach (string folder in folders)
+            {
+                if (baseFolders.Add(folder))
+                {
+                    openedFoldersBuilder.AppendLine(folder);
+                }
+            }
+            txtBaseFolder.Text = openedFoldersBuilder.ToString();
+        }
 
         private void updateFilePathInTextBox(DragEventArgs e, TextBox txt, bool singleFile)
         {
@@ -124,6 +147,8 @@
                 txt.Text = droppedFiles[0];
             }
         }
+
+        // Drag and Drop Mode
 
         private void txtModFolder_DragEnter(object sender, DragEventArgs e)
         {
@@ -147,12 +172,28 @@
 
         private void txtBaseFolder_DragEnter(object sender, DragEventArgs e)
         {
-            txtBaseFolder_DragDrop(sender, e);
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false) == true)
+            {
+                e.Effect = DragDropEffects.All;
+            }
         }
 
         private void txtBaseFolder_DragDrop(object sender, DragEventArgs e)
         {
-            updateFilePathInTextBox(e, txtBaseFolder, false);
+            string[] droppedFolders = (string[])e.Data.GetData(DataFormats.FileDrop);
+            HashSet<string> folders = new HashSet<string>();
+
+            foreach (string file in droppedFolders)
+            {
+                if (Directory.Exists(file))
+                {
+                    folders.Add(file);
+                }
+            }
+            if (folders.Count > 0)
+            {
+                addMultipleBaseFolders(folders);
+            }
         }
 
         private void txtExportFolder_DragEnter(object sender, DragEventArgs e)
