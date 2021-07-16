@@ -19,7 +19,7 @@ The tool can pick the following files:
 * DDS files; the Textures included in the TOBJs.
 * PMD/PMG/PMC files; the selected PMDs, as well as their PMG and PMC siblings following the same naming scheme.
 
-### Usage
+#### Usage
 
 * There are multiple ways to select a Mod, PMD or Export folder. One can either click the dedicated "Open" button to select the file using the Windows File Explorer, 
 drag and drop the folders to the corresponding textboxes or use these textboxes to manually enter the filepath.
