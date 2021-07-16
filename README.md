@@ -19,7 +19,7 @@ The tool can pick the following files:
 * DDS files; the Textures included in the TOBJs.
 * PMD/PMG/PMC files; the selected PMDs, as well as their PMG and PMC siblings following the same naming scheme.
 
-![image](https://user-images.githubusercontent.com/55321868/125977971-f04b2ec6-74c4-4af6-96ad-3ad5312430c2.png)
+![unknown](https://user-images.githubusercontent.com/55321868/125978110-e34eca55-1394-46b3-b970-f0c853da733b.png)
 
 #### Usage
 
