@@ -19,7 +19,9 @@ The tool can pick the following files:
 * DDS files; the Textures included in the TOBJs.
 * PRISM 3D files; the selected PMDs, as well as their PMG, PPD, PMA and PMC siblings following the same naming scheme.
 
-### Usage
+![unknown](https://user-images.githubusercontent.com/55321868/125978110-e34eca55-1394-46b3-b970-f0c853da733b.png)
+
+#### Usage
 
 * There are multiple ways to select a Mod, PMD or Export folder. One can either click the dedicated "Open" button to select the file using the Windows File Explorer, 
 drag and drop the folders to the corresponding textboxes or use these textboxes to manually enter the filepath.
