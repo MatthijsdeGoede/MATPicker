@@ -17,7 +17,7 @@ The tool can pick the following files:
 * MAT files; the Material files included in the selected PMDs.
 * TOBJ files; the Texture Object files included in the Materials.
 * DDS files; the Textures included in the TOBJs.
-* PMD/PMG/PMC files; the selected PMDs, as well as their PMG and PMC siblings following the same naming scheme.
+* PRISM 3D files; the selected PMDs, as well as their PMG, PPD, PMA and PMC siblings following the same naming scheme.
 
 ### Usage
 

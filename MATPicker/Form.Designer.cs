@@ -291,13 +291,14 @@ namespace MATPicker
             // 
             // cklFileTypes
             // 
+            this.cklFileTypes.AllowDrop = true;
             this.cklFileTypes.CheckOnClick = true;
             this.cklFileTypes.FormattingEnabled = true;
             this.cklFileTypes.Items.AddRange(new object[] {
             "MAT files",
             "TOBJ files",
             "DDS files",
-            "PMD/PMG/PMC files"});
+            "PRISM 3D files"});
             this.cklFileTypes.Location = new System.Drawing.Point(26, 406);
             this.cklFileTypes.Name = "cklFileTypes";
             this.cklFileTypes.Size = new System.Drawing.Size(726, 88);

@@ -53,6 +53,8 @@
         {
             HashSet<string> modelFiles = new HashSet<string>();
             AddModelFileIfFound(pmdFile, modelFiles, ".pmd");
+            AddModelFileIfFound(pmdFile, modelFiles, ".ppd");
+            AddModelFileIfFound(pmdFile, modelFiles, ".pma");
             AddModelFileIfFound(pmdFile, modelFiles, ".pmg");
             AddModelFileIfFound(pmdFile, modelFiles, ".pmc");
             return modelFiles;
